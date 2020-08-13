@@ -16,7 +16,7 @@ from flask import Flask, jsonify
 #################################################
 #-----Database Setup-----#
 #################################################
-engine = create_engine("sqlite:///Resources/hawaii.sqlite")
+engine = create_engine("sqlite:///Resources/hawaii.sqlite?check_same_thread=False")
 
 #Reflect an existing database into a new model
 Base = automap_base()
@@ -24,17 +24,17 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 #Save reference to the table
-#Hawaii = Base.classes.hawaii
+
 Measurement = Base.classes.measurement
 Station = Base.classes.station
 
 #################################################
-# Flask Setup
+#-----Flask Setup-----#
 #################################################
 app = Flask(__name__)
 
 #################################################
-# Flask Routes
+#-----Flask Routes-----#
 #################################################
 session = Session(engine)
 
@@ -54,8 +54,7 @@ def welcome():
 def precipitation():
     most_recent_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
     year = most_recent_date[0].split('-')
-    last_12months = dt.date(int(year[0]), int(year[1]), int(year[2])) -  dt.timedelta(days = 365)
-    # Perform a query to retrieve the data and precipitation scores
+    last_12months = dt.date(int(year[0]), int(year[1]), int(year[2])) - dt.timedelta(days = 365)
     pre = session.query(Measurement.date, Measurement.prcp).filter(Measurement.date >= last_12months).all()
 
     pre_dict = {date: p for date, p in pre}
@@ -63,15 +62,15 @@ def precipitation():
 
 @app.route('/api/v1.0/stations')
 def station():
-    stations = session.query(Station.station).all()
-    all_stations = list(np.ravel(stations))
+    stat = session.query(Station.station).all()
+    all_stations = list(np.ravel(stat))
     return jsonify(all_stations)
 
 @app.route('/api/v1.0/tobs')
 def tobs():
     most_recent_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
     year = most_recent_date[0].split('-')
-    last_12months = dt.date(int(year[0]), int(year[1]), int(year[2])) -  dt.timedelta(days = 365)
+    last_12months = dt.date(int(year[0]), int(year[1]), int(year[2])) - dt.timedelta(days = 365)
 
     last_year_temp = session.query(Measurement.tobs).filter(Measurement.station == 'USC00519281').filter(Measurement.date >= last_12months).all()
    
@@ -90,11 +89,12 @@ def calc_temps(start_date):
     Returns:
         TMIN, TAVE, and TMAX
     """
-    start = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date >= start_date).all()
-    start_rav = list(np.ravel(start))
-
-    return jsonify(start_rav)
+    start = session.query(Measurement.date,func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+        filter(Measurement.date >= start_date).group_by(Measurement.date).all()
+  
+    calc_temp_dict = [{'Date': d, 'Min Temp': mi, 'Avg Temp': av, 'Max Temp': ma} for d, mi, av, ma in start]
+    
+    return jsonify(calc_temp_dict)
     
 @app.route('/api/v1.0/<start_date>/<end_date>')
 def calc_temps2(start_date, end_date):
@@ -107,11 +107,11 @@ def calc_temps2(start_date, end_date):
     Returns:
         TMIN, TAVE, and TMAX
     """
-    start_end = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).all()
-    start_end_rav = list(np.ravel(start_end))
-
-    return jsonify(start_end_rav)
+    start_end = session.query(Measurement.date, func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+        filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).group_by(Measurement.date).all()
+    #start_end_rav = list(np.ravel(start_end))
+    calc_temp_dict = [{'Date': d, 'Min Temp': mi, 'Avg Temp': av, 'Max Temp': ma} for d, mi, av, ma in start_end]
+    return jsonify(calc_temp_dict)
 
 if __name__ == '__main__':
     app.run(debug=True)
