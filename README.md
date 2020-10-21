@@ -12,12 +12,12 @@ Thanks for checking out my project's repo! You can view a Honolulu, Hawaii clima
 <!--About the Project-->
 ## About the Project
 
-The Jupyter notebook Honolulu, Hawaii climate analysis includes: 
+<b>The Jupyter notebook Honolulu, Hawaii climate analysis includes: </b>
 * Precipitation analyses and visualizations
 * Station analyses and visualizations
 * Temperature analyses, visualizations, and predictions
 
-Available routes through Flask API: <br>
+<b>Available routes through Flask API: </b><br>
 
 /api/v1.0/precipitation <br>
 
@@ -30,8 +30,6 @@ Example: /api/v1.0/2016-03-10 <br>
 
 /api/v1.0/start_date/end_date <br>
 Example: /api/v1.0/2016-03-10/2016-03-20 <br>
-
-
 
 <!--Built With-->
 ### Built With
