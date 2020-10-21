@@ -12,7 +12,7 @@ Thanks for checking out my project's repo! You can view a Honolulu, Hawaii clima
 <!--About the Project-->
 ## About the Project
 
-Jupyter notebook Honolulu, Hawaii climate analysis includes: 
+The Jupyter notebook Honolulu, Hawaii climate analysis includes: 
 * Precipitation analyses and visualizations
 * Station analyses and visualizations
 * Temperature analyses, visualizations, and predictions
@@ -47,17 +47,19 @@ This project was built using the following frameworks/libraries/databases:<br>
 * SQLite
 
 <!--Project Instructions-->
+## Project Instructions
+
 <br>
 Congratulations! You've decided to treat yourself to a long holiday vacation in Honolulu, Hawaii! To help with your trip planning, you need to do some climate analysis on the area. The following outlines what you need to do.<br>
 
-# Step 1 - Climate Analysis and Exploration
+### Step 1 - Climate Analysis and Exploration
 To begin, use Python and SQLAlchemy to do basic climate analysis and data exploration of your climate database. All of the following analysis should be completed using SQLAlchemy ORM queries, Pandas, and Matplotlib.<br>
 -Use the provided starter notebook and hawaii.sqlite files to complete your climate analysis and data exploration.<br>
 -Choose a start date and end date for your trip. Make sure that your vacation range is approximately 3-15 days total.<br>
 -Use SQLAlchemy create_engine to connect to your sqlite database.<br>
 -Use SQLAlchemy automap_base() to reflect your tables into classes and save a reference to those classes called Station and Measurement.<br>
 
-## Precipitation Analysis
+#### Precipitation Analysis
 -Design a query to retrieve the last 12 months of precipitation data.<br>
 -Select only the date and prcp values.<br>
 -Load the query results into a Pandas DataFrame and set the index to the date column.<br>
@@ -65,7 +67,7 @@ To begin, use Python and SQLAlchemy to do basic climate analysis and data explor
 -Plot the results using the DataFrame plot method.<br>
 -Use Pandas to print the summary statistics for the precipitation data.<br>
 
-## Analysis
+#### Analysis
 -Design a query to calculate the total number of stations.<br>
 -Design a query to find the most active stations.<br>
 -List the stations and observation counts in descending order.<br>
@@ -74,7 +76,7 @@ To begin, use Python and SQLAlchemy to do basic climate analysis and data explor
 -Filter by the station with the highest number of observations.<br>
 -Plot the results as a histogram with bins=12.<br>
 
-# Step 2 - Climate App
+### Step 2 - Climate App
 -Now that you have completed your initial analysis, design a Flask API based on the queries that you have just developed. Use Flask to create your routes.<br>
 
 -Routes:<br>
@@ -98,18 +100,18 @@ Return a JSON list of the minimum temperature, the average temperature, and the 
 When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.<br>
 When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.<br>
 
-# Bonus: Other Recommended Analyses
+### Bonus: Other Recommended Analyses
 
 The following are optional challenge queries. These are highly recommended to attempt, but not required for the homework.<br>
 
-## Temperature Analysis I
+#### Temperature Analysis I
 
 Hawaii is reputed to enjoy mild weather all year. Is there a meaningful difference between the temperature in, for example, June and December?<br>
 You may either use SQLAlchemy or pandas's read_csv() to perform this portion.<br>
 -Identify the average temperature in June at all stations across all available years in the dataset. Do the same for December temperature.<br>
 -Use the t-test to determine whether the difference in the means, if any, is statistically significant. Will you use a paired t-test, or an unpaired t-test? Why?<br>
 
-## Temperature Analysis II
+#### Temperature Analysis II
 
 The starter notebook contains a function called calc_temps that will accept a start date and end date in the format %Y-%m-%d. The function will return the minimum, average, and maximum temperatures for that range of dates.<br>
 -Use the calc_temps function to calculate the min, avg, and max temperatures for your trip using the matching dates from the previous year (i.e., use "2017-01-01" if your trip start date was "2018-01-01").<br>
@@ -117,7 +119,7 @@ The starter notebook contains a function called calc_temps that will accept a st
 -Use the average temperature as the bar height.<br>
 -Use the peak-to-peak (TMAX-TMIN) value as the y error bar (YERR).<br>
 
-## Daily Rainfall Average
+#### Daily Rainfall Average
 
 -Calculate the rainfall per weather station using the previous year's matching dates.<br>
 -Calculate the daily normals. Normals are the averages for the min, avg, and max temperatures.<br>
