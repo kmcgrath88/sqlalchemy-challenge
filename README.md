@@ -1,4 +1,52 @@
-## sqlalchemy-challenge
+#  Honolulu, Hawaii Vacation
+
+Thanks for checking out my project's repo! You can view a Honolulu, Hawaii climate analysis through my jupyter notebook file. Also, by downloading my repo and running app.py through flask, you can view additional climate information through available API routes. <br>
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Project Instructions](#project-instructions)
+
+<!--About the Project-->
+## About the Project
+
+Jupyter notebook Honolulu, Hawaii climate analysis includes: 
+* Precipitation analyses and visualizations
+* Station analyses and visualizations
+* Temperature analyses, visualizations, and predictions
+
+Available routes through Flask API: <br>
+
+/api/v1.0/precipitation <br>
+
+/api/v1.0/stations <br>
+
+/api/v1.0/tobs <br>
+
+/api/v1.0/start_date <br>
+Example: /api/v1.0/2016-03-10 <br>
+
+/api/v1.0/start_date/end_date <br>
+Example: /api/v1.0/2016-03-10/2016-03-20 <br>
+
+
+
+<!--Built With-->
+### Built With
+This project was built using the following frameworks/libraries/databases:<br>
+* Python
+* SQLAlchemy
+* Flask
+* Pandas
+* Matplotlib
+* NumPy
+* SciPy
+* Datetime
+* SQLite
+
+<!--Project Instructions-->
 <br>
 Congratulations! You've decided to treat yourself to a long holiday vacation in Honolulu, Hawaii! To help with your trip planning, you need to do some climate analysis on the area. The following outlines what you need to do.<br>
 
